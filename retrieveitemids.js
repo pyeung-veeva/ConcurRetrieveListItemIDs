@@ -6,10 +6,12 @@ var options = {
     consumerKey:'REPLACE_ME'
 }
 
+var listId = '';
+
 //---------------------------------------------------------------
 // Print out how to use
 //---------------------------------------------------------------
-if (process.argv[2]=='showlist') {
+if (process.argv[2]=='showlists') {
   printLists();
 } else if (process.argv[2]=='showlistitems') {
   printListItems(process.argv[3]);
@@ -17,7 +19,7 @@ if (process.argv[2]=='showlist') {
   console.log('****************************************************');
   console.log('Usage: ');
   console.log(' To show lists, run:');
-  console.log('   node retrieveitemids.js showlist ');
+  console.log('   node retrieveitemids.js showlists');
   console.log(' To show list items for list, run:');
   console.log('   node retrieveitemids.js showlistitems {listId} ');
   console.log('****************************************************');
@@ -31,7 +33,6 @@ function printLists() {
   .then(function(token) {
       // token will contain the value, instanceUrl, refreshToken, and expiration details
       //console.log(JSON.stringify(token));
-      //console.log('OAuth token: ' + token.value);
 
       //This will contain a list of Lists
        var options = {
@@ -65,17 +66,23 @@ function printLists() {
 //---------------------------------------------------------------
 // Print the available lists
 //---------------------------------------------------------------
-function printListItems(listItemId) {
+function printListItems(listId) {
+  this.listId = listId;
   concur.oauth.native(options)
-  .then(function(token, listItemId) {
+  .then(function(token) {
       // token will contain the value, instanceUrl, refreshToken, and expiration details
 
-      //This will contain a list of Lists
        var options = {
          oauthToken:token.value,
-         id:listItemId
+         limit:100,
+         // Concur's SDK document is incorrect. After tracing through this, you have to put listId into queryParameters
+         queryParameters:{
+            listId:this.listId
+         }
        };
 
+       // The below doesn't work.  Seems to only return the same airline list no matter which list id is passed.
+       // will try direct HTTP call instead
        concur.listItems.get(options)
        .then(function(data) {
           //console.log('Result of list item: ' + JSON.stringify(data, null, 4));
@@ -84,18 +91,18 @@ function printListItems(listItemId) {
           console.log('****************************************************');
           for(var i = 0; i < data.Items.length; i++) {
               var row = data.Items[i];
-              //console.log(JSON.stringify(row, null, 4));
               console.log(i + ')  ' + row['Name'] + ',\t(listitemid= ' + row['ID']+ ')');
           }
        })
        .fail(function(error) {
          // Error will contain the error returned.
+         console.log(JSON.stringify(error,null,4));
        });
-
 
 
   })
   .fail(function(error) {
       // error will contain the error message returned
+      console.log(JSON.stringify(error,null,4));
   });
 }

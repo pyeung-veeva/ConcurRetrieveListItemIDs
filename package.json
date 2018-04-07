@@ -1,0 +1,28 @@
+{
+  "name": "concurretrieveitemid",
+  "version": "1.0.0",
+  "description": "Retrieve the Concur List Item Id via node.js",
+  "main": "retrieveitemids.js",
+  "dependencies": {
+    "concur-platform": "^0.3.13",
+    "request": "^2.85.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterlyeung/ConcurRetrieveListItemIDs.git"
+  },
+  "keywords": [
+    "concur",
+    "item"
+  ],
+  "author": "Peter Yeung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peterlyeung/ConcurRetrieveListItemIDs/issues"
+  },
+  "homepage": "https://github.com/peterlyeung/ConcurRetrieveListItemIDs#readme"
+}

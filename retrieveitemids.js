@@ -17,9 +17,9 @@ if (process.argv[2]=='showlist') {
   console.log('****************************************************');
   console.log('Usage: ');
   console.log(' To show lists, run:');
-  console.log('   node index.js showlist ');
+  console.log('   node retrieveitemids.js showlist ');
   console.log(' To show list items for list, run:');
-  console.log('   node index.js showlistItems {listId} ');
+  console.log('   node retrieveitemids.js showlistitems {listId} ');
   console.log('****************************************************');
 }
 

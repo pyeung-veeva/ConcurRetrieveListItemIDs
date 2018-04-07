@@ -5,10 +5,10 @@ Node.js to retrieve Concur List Item Id's
 npm install
 
 # To show options:
-node retrievelist.js 
+node retrieveitemsids.js 
 
 # To show available lists within your instance of Concur 
-node retrievelist.js showlists
+node retrieveitemsids.js showlists
 
 # To show list item ids
-node retrievelist.js showlistitems <listid>
+node retrieveitemsids.js showlistitems <listid>

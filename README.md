@@ -11,4 +11,4 @@ node retrieveitemsids.js
 node retrieveitemsids.js showlists
 
 # To show list item ids
-node retrieveitemsids.js showlistitems <listid>
+node retrieveitemsids.js showlistitems {listid}
